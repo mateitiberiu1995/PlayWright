@@ -53,6 +53,105 @@ Test Case 3: Login User with incorrect email and password
     7. Click 'login' button
     8. Verify error 'Your email or password is incorrect!' is visible
 
+test cases 2 and 3 were easy, i didnt test again the deletion of the account as to have a proper username for later tests
+
+
+Test Case 4: Logout User
+
+    1. Launch browser
+    2. Navigate to url 'http://automationexercise.com'
+    3. Verify that home page is visible successfully
+    4. Click on 'Signup / Login' button
+    5. Verify 'Login to your account' is visible
+    6. Enter correct email address and password
+    7. Click 'login' button
+    8. Verify that 'Logged in as username' is visible
+    9. Click 'Logout' button
+    10. Verify that user is navigated to login page
+
+
+Test Case 5: Register User with existing email
+
+    1. Launch browser
+    2. Navigate to url 'http://automationexercise.com'
+    3. Verify that home page is visible successfully
+    4. Click on 'Signup / Login' button
+    5. Verify 'New User Signup!' is visible
+    6. Enter name and already registered email address
+    7. Click 'Signup' button
+    8. Verify error 'Email Address already exist!' is visible
+
+
+Test cases 4 and 5 were very simple, without adding something complicated that i didnt use before. 
+
+
+Test Case 6: Contact Us Form
+
+    1. Launch browser
+    2. Navigate to url 'http://automationexercise.com'
+    3. Verify that home page is visible successfully
+    4. Click on 'Contact Us' button
+    5. Verify 'GET IN TOUCH' is visible
+    6. Enter name, email, subject and message
+    7. Upload file
+    8. Click 'Submit' button
+    9. Click OK button
+    10. Verify success message 'Success! Your details have been submitted successfully.' is visible
+    11. Click 'Home' button and verify that landed to home page successfully
+
+With test case 6 I encountered some issues, first was the placeholder email (they had another email text box down the page), solved that. I encountered the choose a file button, after some researching i came with an answer. 
+After that and what i think was an actual problem, pressing submit will open a dialog box , on my browser it shows but everytime was used in the project chronium webkit or firefox that dialog box wasnt opening. 
+At first i thought it was a popup, but later on after some digging i found its a dialog box, with the help of the internet i made it for the dialog box to accept the message without any issue. The main problem was that pressing the submit button wouldnt get you to the next page, blocking everything.
+The rest of the exercise was easy. 
+
+
+Test Case 7: Verify Test Cases Page
+
+    1. Launch browser
+    2. Navigate to url 'http://automationexercise.com'
+    3. Verify that home page is visible successfully
+    4. Click on 'Test Cases' button
+    5. Verify user is navigated to test cases page successfully
+
+
+Test Case 8: Verify All Products and product detail page
+
+    1. Launch browser
+    2. Navigate to url 'http://automationexercise.com'
+    3. Verify that home page is visible successfully
+    4. Click on 'Products' button
+    5. Verify user is navigated to ALL PRODUCTS page successfully
+    6. The products list is visible
+    7. Click on 'View Product' of first product
+    8. User is landed to product detail page
+    9. Verify that detail detail is visible: product name, category, price, availability, condition, brand
+
+with test case 8 i had to learn the first function when having more than one thing in the page. 
+
+
+Test Case 9: Search Product
+
+    1. Launch browser
+    2. Navigate to url 'http://automationexercise.com'
+    3. Verify that home page is visible successfully
+    4. Click on 'Products' button
+    5. Verify user is navigated to ALL PRODUCTS page successfully
+    6. Enter product name in search input and click search button
+    7. Verify 'SEARCHED PRODUCTS' is visible
+    8. Verify all the products related to search are visible
+
+
+Test Case 10: Verify Subscription in home page
+
+    1. Launch browser
+    2. Navigate to url 'http://automationexercise.com'
+    3. Verify that home page is visible successfully
+    4. Scroll down to footer
+    5. Verify text 'SUBSCRIPTION'
+    6. Enter email address in input and click arrow button
+    7. Verify success message 'You have been successfully subscribed!' is visible
+
+until now it wasnt so complicated, some new stuff to search items and that's all
 
 
 
