@@ -2,17 +2,26 @@
 import { test, expect } from '@playwright/test';
 //import { selectors } from '@playwright/test';
 
-//selectors.setTestIdAttribute('data-qa');
+test.beforeEach(async ({ page }) => {
+  await page.route('**/*', route => {
+    const url = route.request().url();
+
+    if (
+      url.includes('doubleclick.net') ||
+      url.includes('googlesyndication') ||
+      url.includes('adservice')
+    ) {
+      route.abort();
+    } else {
+      route.continue();
+    }
+  });
+});
 
 test('testCase1', async ({ page }) => {
     await page.goto('https://automationexercise.com');
 
-    // making sure features items is visible
     await expect(page.getByText('FEATURES ITEMS')).toBeVisible();
-
-
-
-    await page.getByRole('button', {name :  'Consent'}).click();
 
     await page.getByRole('listitem').filter({ hasText: 'Signup / Login' }).click();
 
@@ -36,15 +45,9 @@ test('testCase1', async ({ page }) => {
 
     await page.getByTestId('years').selectOption('1995');
 
-    //await page.mouse.wheel(0, 500);
-
     await page.getByRole('checkbox', {name: 'newsletter'}).click();
 
-
-
     await page.getByRole('checkbox', {name: 'Receive Special offers'}).click();
-
-    //await page.mouse.wheel(0, 500);
 
     await page.getByTestId('first_name').fill('Tiberiu');
 
@@ -53,8 +56,6 @@ test('testCase1', async ({ page }) => {
     await page.getByTestId('company').fill('Infosys');
 
     await page.getByTestId('address').fill('34 River');
-
-
 
     await page.getByTestId('address2').fill('Harlinger, London');
 
@@ -74,19 +75,11 @@ test('testCase1', async ({ page }) => {
 
     await page.getByTestId('continue-button').click();
 
-    //await page.getByRole('button', { name: 'Close ad' }).click();
-
     await expect(page.getByText('Logged in as Matei Tiberiu')).toBeVisible();
 
     await page.getByRole('listitem').filter({ hasText: 'Delete Account' }).click();
 
     await expect(page.getByText('ACCOUNT DELETED!')).toBeVisible();
-    //await page.getByText('5').mouse.wheel(0, 3);
-
-    //await page.getByRole('listitem',{name: '26'}).click();
-    //await page.getByRole('form').filter({ hasText: 'signup' }).getByPlaceholder('Email Address').fill('mateitiberiu1995@gmail.com');
-
-
 
 
 });

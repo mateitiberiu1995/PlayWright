@@ -1,13 +1,27 @@
 import { test, expect } from '@playwright/test';
 
+test.beforeEach(async ({ page }) => {
+  await page.route('**/*', route => {
+    const url = route.request().url();
+
+    if (
+      url.includes('doubleclick.net') ||
+      url.includes('googlesyndication') ||
+      url.includes('adservice')
+    ) {
+      route.abort();
+    } else {
+      route.continue();
+    }
+  });
+});
+
 test('testCase2', async ({page}) => {
 
     // we created before hand the account testerPlay with password testerPlay and email testerPlay@yahoo.com
     await page.goto('https://automationexercise.com');
 
     await expect(page.getByText('FEATURES ITEMS')).toBeVisible();
-
-    await page.getByRole('button', {name :  'Consent'}).click();
 
     await page.getByRole('listitem').filter({ hasText: 'Signup / Login' }).click();
 
@@ -33,8 +47,6 @@ test('testCase3', async({ page }) => {
     await page.goto('https://automationexercise.com');
 
     await expect(page.getByText('FEATURES ITEMS')).toBeVisible();
-
-    await page.getByRole('button', {name :  'Consent'}).click();
 
     await page.getByRole('listitem').filter({ hasText: 'Signup / Login' }).click();
 
