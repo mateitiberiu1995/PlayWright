@@ -1,11 +1,25 @@
 import { test, expect } from '@playwright/test';
 
+test.beforeEach(async ({ page }) => {
+  await page.route('**/*', route => {
+    const url = route.request().url();
+
+    if (
+      url.includes('doubleclick.net') ||
+      url.includes('googlesyndication') ||
+      url.includes('adservice')
+    ) {
+      route.abort();
+    } else {
+      route.continue();
+    }
+  });
+});
+
 test('testCase 4', async ({page})=>{
     await page.goto('https://automationexercise.com');
 
     await expect(page.getByText('FEATURES ITEMS')).toBeVisible();
-
-    await page.getByRole('button', {name :  'Consent'}).click();
 
     await page.getByRole('listitem').filter({ hasText: 'Signup / Login' }).click();
 
@@ -33,8 +47,6 @@ test('testCase 5', async ({page}) => {
 
     await expect(page.getByText('FEATURES ITEMS')).toBeVisible();
 
-    await page.getByRole('button', {name :  'Consent'}).click();
-
     await page.getByRole('listitem').filter({ hasText: 'Signup / Login' }).click();
 
     await expect(page.getByText('New User Signup!')).toBeVisible();
@@ -51,8 +63,6 @@ test('testCase 6', async ({page}) => {
     await page.goto('https://automationexercise.com');
 
     await expect(page.getByText('FEATURES ITEMS')).toBeVisible();
-
-    await page.getByRole('button', {name :  'Consent'}).click();
 
     await page.getByRole('listitem').filter({ hasText: 'Contact us' }).click()
 
@@ -76,9 +86,6 @@ test('testCase 6', async ({page}) => {
     page.getByTestId('submit-button').click();
 
 
-    //await popup.waitForLoadState();
-    //await page.getByRole('button', {name :  'OK', exact: true}).click();
-
     await expect(page.locator('#contact-page').getByText('Success! Your details have')).toBeVisible();
 
     await page.getByRole('listitem').filter({ hasText: 'Home' }).click();
@@ -90,8 +97,6 @@ test('testCase 7', async ({page}) => {
 
     await expect(page.getByText('FEATURES ITEMS')).toBeVisible();
 
-    await page.getByRole('button', {name :  'Consent'}).click();
-
     await page.getByRole('listitem').filter({ hasText: 'Test Cases' }).click();
 
     await expect(page).toHaveURL('https://automationexercise.com/test_cases');
@@ -100,8 +105,6 @@ test('testCase 8', async ({page}) => {
     await page.goto('https://automationexercise.com');
 
     await expect(page.getByText('FEATURES ITEMS')).toBeVisible();
-
-    await page.getByRole('button', {name :  'Consent'}).click();
 
     await page.getByRole('listitem').filter({ hasText: 'Products' }).click();
 
@@ -130,8 +133,6 @@ test('testCase 9', async ({page})=>{
 
     await expect(page.getByText('FEATURES ITEMS')).toBeVisible();
 
-    await page.getByRole('button', {name :  'Consent'}).click();
-
     await page.getByRole('listitem').filter({ hasText: 'Products' }).click();
 
     await expect(page).toHaveURL('https://automationexercise.com/products');
@@ -148,8 +149,6 @@ test('testCase 10', async ({page})=>{
     await page.goto('https://automationexercise.com');
 
     await expect(page.getByText('FEATURES ITEMS')).toBeVisible();
-
-    await page.getByRole('button', {name :  'Consent'}).click();
 
     await page.evaluate(() => {
     window.scrollTo(0, document.body.scrollHeight);});
