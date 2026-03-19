@@ -1,3 +1,4 @@
+import { test, expect } from '@playwright/test';
 class Menu{
     constructor(page)
     {
@@ -10,40 +11,50 @@ class Menu{
         this.apiTesting = page.getByRole('listitem').filter({ hasText: 'API Testing'});
         this.contactUs = page.getByRole('listitem').filter({ hasText: 'Contact Us'});
         this.videoTutorials = page.getByRole('listitem').filter({ hasText: 'Video Tutorials'});
-
-        async goToSignUpLogin()
-        {
-            await this.signLogin.click();
-        }
-        async goToHome()
-        {
-            await this.home.click();
-        }
-        async goToProducts()
-        {
-            await this.products.click();
-        }
-        async goToCart()
-        {
-            await this.cart.click();
-        }
-        async goToTestCases()
-        {
-            await this.testCases.click();
-        }
-        async goToApiTesting()
-        {
-            await this.apiTesting.click();
-        }
-        async goToContactUs()
-        {
-            await this.contactUs.click();
-        }
-        async goToVideoTutorials()
-        {
-            await this.videoTutorials.click();
-        }
+        this.deleteAccount = page.getByRole('listitem').filter({ hasText: 'Delete Account' });
     }
+    async goToSignUpLogin()
+    {
+        await this.signLogin.click();
+    }
+    async goToHome()
+    {
+        await this.home.click();
+    }
+    async goToProducts()
+    {
+        await this.products.click();
+    }
+    async goToCart()
+    {
+        await this.cart.click();
+    }
+    async goToTestCases()
+    {
+        await this.testCases.click();
+    }
+    async goToApiTesting()
+    {
+        await this.apiTesting.click();
+    }
+    async goToContactUs()
+    {
+        await this.contactUs.click();
+    }
+    async goToVideoTutorials()
+    {
+        await this.videoTutorials.click();
+    }
+    async checkUserLoggedIn(name)
+    {
+        await expect(this.page.getByText('Logged in as ' + name)).toBeVisible();
+    }
+    async goDeleteAccount()
+    {
+        await this.deleteAccount.click();
+        await expect(this.page.getByText('ACCOUNT DELETED!')).toBeVisible();
+    }
+
 }
 
 module.exports = Menu;

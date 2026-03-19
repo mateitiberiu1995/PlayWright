@@ -18,3 +18,5 @@ class Subscribe{
         await expect(this.page.getByText('You have been successfully subscribed!')).toBeVisible();
     }
 }
+
+module.exports = Subscribe;

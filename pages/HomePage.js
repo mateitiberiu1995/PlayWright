@@ -1,3 +1,4 @@
+import { test, expect } from '@playwright/test';
 const Menu = require('../components/Menu');
 const Subscribe = require('../components/Subscribe');
 class HomePage{
@@ -8,6 +9,20 @@ class HomePage{
     }
     async navigate()
     {
+        await this.page.route('**/*', route => {
+        const url = route.request().url();
+
+        if (
+            url.includes('doubleclick.net') ||
+            url.includes('googlesyndication') ||
+            url.includes('adservice')
+        ) {
+            route.abort();
+        } else {
+            route.continue();
+        }
+        });
+
         await this.page.goto('https://automationexercise.com');
     }
     async areWeHome()
@@ -16,3 +31,5 @@ class HomePage{
     }
     //this.page
 }
+
+module.exports = HomePage;
