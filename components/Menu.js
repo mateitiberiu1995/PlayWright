@@ -12,6 +12,7 @@ class Menu{
         this.contactUs = page.getByRole('listitem').filter({ hasText: 'Contact Us'});
         this.videoTutorials = page.getByRole('listitem').filter({ hasText: 'Video Tutorials'});
         this.deleteAccount = page.getByRole('listitem').filter({ hasText: 'Delete Account' });
+        this.logout = page.getByRole('listitem').filter({ hasText: 'Logout' });
     }
     async goToSignUpLogin()
     {
@@ -53,6 +54,10 @@ class Menu{
     {
         await this.deleteAccount.click();
         await expect(this.page.getByText('ACCOUNT DELETED!')).toBeVisible();
+    }
+    async goToLogout()
+    {
+        await this.logout.click();
     }
 
 }

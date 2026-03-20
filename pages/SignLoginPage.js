@@ -60,6 +60,14 @@ class SignLoginPage{
     {
         await expect(this.page.getByText('ACCOUNT CREATED!')).toBeVisible();
     }
+    async checkFailedDetails()
+    {
+        await expect(this.page.getByText('Your email or password is incorrect!')).toBeVisible();
+    }
+    async checkWrongEmail()
+    {
+        await expect(this.page.getByText('Email Address already exist!')).toBeVisible();
+    }
     async changeNameForm(name)
     {
         await this.formName.fill(name);
@@ -119,6 +127,10 @@ class SignLoginPage{
     async fillMobileNumber(mobile)
     {
         await this.mobileNumber.fill(mobile);
+    }
+    async checkURL()
+    {
+        await expect(this.page).toHaveURL('https://automationexercise.com/login');
     }
 }
 

@@ -29,6 +29,10 @@ class HomePage{
     {
         await expect(this.page.getByText('FEATURES ITEMS')).toBeVisible();
     }
+    async checkURL()
+    {
+        await expect(this.page).toHaveURL('https://automationexercise.com/');
+    }
     //this.page
 }
 
